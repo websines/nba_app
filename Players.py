@@ -61,4 +61,7 @@ class Players:
         for player in self.players:
             if player.get_level() == level:
                 print(f"Player Name: {player.get_name()}, Number: {player.get_number()}, Age: {player.get_age()}")
+    
+    def get_players_list(self):
+        return self.players
 

@@ -14,6 +14,7 @@ class Season:
         print("2. Display the current round.")
         print("3. Play games.")
         print("4. Display the game result records.")
+        print("5. Display the credits of all players.")
         print("R. Return to previous menu.")
         choice = input("Enter a choice: ")
         while choice.upper() != "R":
@@ -25,6 +26,8 @@ class Season:
                 self.play_games()
             elif choice == "4":
                 self.display_game_records()
+            elif choice == "5":
+                self.display_all_credits()
             else:
                 print("Invalid choice. Please try again.")
             print("\n")
@@ -33,19 +36,21 @@ class Season:
             print("2. Display the current round.")
             print("3. Play games.")
             print("4. Display the game result records.")
+            print("5. Display the credits of all players.")
             print("R. Return to previous menu.")
             choice = input("Enter a choice: ")
 
     def add_team_to_round(self):
         print("The existing teams are as follows:")
         for team in self.teams:
-            print(team.get_team_name())
+            if not team.scheduled:  # Add this line
+                print(team.get_team_name())
         team_name = input("Please enter the team's name that you want to schedule: ")
         team = self.find_team_by_name(team_name)
         if team:
             self.round.append(team)
             print(f"Team {team.get_team_name()} has been added at the Game {len(self.round)//2} position {len(self.round) % 2}")
-            self.teams.remove(team)
+            team.set_scheduled(True)  # Update this line
         else:
             print("No such team! Please try again")
 
@@ -76,6 +81,7 @@ class Season:
 
             # Update players' credits based on the game result
             credit_difference = abs(first_team.get_average_credit() - second_team.get_average_credit())
+            credit_difference /= 5
             winner.update_credits(credit_difference)
             loser.update_credits(-credit_difference)
         self.round_number += 1
@@ -88,3 +94,9 @@ class Season:
         for record in self.game_results:
             print("| {:<12} | {:<12} | {:<7} | {:<10} |".format(record.win_team, record.lose_team, record.game_no, record.round_number))
         print("+------------+------------+---------+------------+")
+
+
+    def display_all_credits(self):
+        for team in self.round:
+            team.display_credits()
+            print()

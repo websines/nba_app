@@ -1,11 +1,16 @@
 from Players import Players
+from Utils import Utils
 class Team:
     def __init__(self, team_name):
         self.team_name = team_name
         self.players = Players()
+        self.scheduled = False
 
     def get_team_name(self):
         return self.team_name
+    
+    def set_scheduled(self, bool):
+        self.scheduled = bool
 
     def set_team_name(self, team_name):
         self.team_name = team_name
@@ -67,3 +72,15 @@ class Team:
             print("4. Delete an existing player.")
             print("R. Return to previous menu.")
             choice = input("Enter a choice: ")
+    
+    def update_credits(self, credit_difference):
+        for player in self.players.get_players_list():
+            player.credit += credit_difference
+
+    def display_credits(self):
+        print(f"Players' credits in {self.team_name}:")
+        Utils.playerHeader()
+        for player in self.players.get_players_list():
+            print(Utils.PlayerFormat(player.get_name(), player.get_credit(), player.get_level(), player.get_number(), player.get_age()))
+        Utils.playerTableEnd()
+            
