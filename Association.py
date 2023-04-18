@@ -14,7 +14,7 @@ class Association:
         nets = self.teams.create_team("Nets")
 
         # # Adding players to the Suns
-        suns.add_player(Player("Devin Booker", credit=2500, number=1, age=26))
+        suns.add_player(Player("Devin Booker", 2500, 1, 26))
         suns.add_player(Player("Chris Paul", 1500, 3, 37))
         suns.add_player(Player("Deandre Ayton", 2000, 22, 24))
         suns.add_player(Player("Kevin Durant", 3000, 35, 34))

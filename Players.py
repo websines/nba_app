@@ -22,7 +22,7 @@ class Players:
             
         player = Player(name, credit, number, age)
         self.players.append(player)
-        print(f"Player {player.get_name()} (No. {player.get_number()}) added successfully.")
+        #print(f"Player {player.get_name()} (No. {player.get_number()}) added successfully.")
 
 
 
